@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
+import UserForm from './components/UserForm/UserForm';
+import Tabs from './components/Tabs/Tabs';
+import TaskInput from './components/TaskInput/TaskInput';
 import './App.css';
 
-function App() {
+const App = ({ username }) => {
+  const [page, setPage] = useState(1);
+
+  const handleNextStep = () => {
+    setPage(2);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <Provider store={store}>
+    <div>
+      {page === 1 && <UserForm onNextClick={handleNextStep}/>}
+      {page === 2 && (
+      <div>
+        <TaskInput />
+        <Tabs />
+      </div>
+    )}
     </div>
+   </Provider>
   );
 }
 
