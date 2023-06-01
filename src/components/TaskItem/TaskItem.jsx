@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { markTaskAsCompleted, editTask, deleteTask } from "../../redux/actions";
+import editIcon from "../../icons/edit-icon.png";
+import deleteIcon from "../../icons/delete-icon.png";
+import "./TaskItem.css";
 
 const TaskItem = ({ task, markTaskAsCompleted, editTask, deleteTask }) => {
-  const handleCompleteClick = () => {
-    markTaskAsCompleted(task.id);
-  };
 
   const handleEditClick = () => {
     const newTaskText = prompt("Введите новый текст задачи", task.text);
@@ -18,12 +18,23 @@ const TaskItem = ({ task, markTaskAsCompleted, editTask, deleteTask }) => {
     deleteTask(task.id);
   };
 
+  const handleTaskClick = () => {
+    if (!task.completed) {
+      markTaskAsCompleted(task.id);
+    }
+  };
+
   return (
-    <div>
-      <span>{task.text}</span>
-      <button onClick={handleCompleteClick}>Завершить</button>
-      <button onClick={handleEditClick}>Редактировать</button>
-      <button onClick={handleDeleteClick}>Удалить</button>
+    <div className={`task-item ${task.completed ? "completed" : ""}`}>
+      <span onClick={handleTaskClick}>{task.text}</span>
+      <div className="button-container">
+        <button className="icon-button" onClick={handleEditClick}>
+          <img src={editIcon} alt="Редактировать" />
+        </button>
+        <button className="icon-button" onClick={handleDeleteClick}>
+          <img src={deleteIcon} alt="Удалить" />
+        </button>
+      </div>
     </div>
   );
 };

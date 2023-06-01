@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTask } from '../../redux/actions';
+import './TaskInput.css'
 
 const TaskInput = ({ addTask }) => {
   const [taskText, setTaskText] = useState('');
@@ -17,14 +18,15 @@ const TaskInput = ({ addTask }) => {
   };
 
   return (
-    <div>
+    <div className='task-input'>
       <input
         type="text"
         value={taskText}
         onChange={handleInputChange}
         placeholder="Введите задачу"
+        className="task-input__input"
       />
-      <button onClick={handleAddTask}>Добавить</button>
+      <button className='task-input__button' onClick={handleAddTask}>Добавить</button>
     </div>
   );
 };

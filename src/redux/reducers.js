@@ -11,18 +11,20 @@ const reducer = (state = initialState, action) => {
     case 'ADD_TASK':
       return { ...state, tasks: [...state.tasks, action.payload] };
     case 'MARK_TASK_AS_COMPLETED':
-      const completedTask = state.tasks.find(task => task.id === action.payload);
-      const updatedTasks = state.tasks.map((task) => {
-        if (task.id === action.payload) {
-          return { ...task, completed: true };
-        }
-        return task;
-      });
-      return { 
-        ...state,
-        tasks: updatedTasks,
-        completedTasks: [...state.completedTasks, completedTask],
-      };
+      const taskIndex = state.tasks.findIndex(task => task.id === action.payload);
+      if (taskIndex !== -1) {
+        const task = state.tasks[taskIndex];
+        const updatedTask = { ...task, completed: true };
+        return {
+          ...state,
+          tasks: [
+            ...state.tasks.slice(0, taskIndex),
+            ...state.tasks.slice(taskIndex + 1)
+          ],
+          completedTasks: [...state.completedTasks, updatedTask],
+        };
+      }
+      return state;
     case 'EDIT_TASK':
       return {
         ...state,

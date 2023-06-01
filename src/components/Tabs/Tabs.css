@@ -1,0 +1,50 @@
+.tabs {
+  margin-top: 20px;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.tab-buttons button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px groove;
+  color: #333;
+  cursor: pointer;
+}
+
+.tab-buttons button.active {
+  border: 1px solid;
+  font-weight: bold;
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+
+.tab-content h2 {
+  font-size: 20px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-item span {
+  margin-right: 10px;
+}
+
+.task-item button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import TaskList from "../TaskList/TaskList";
 import TaskItem from "../TaskItem/TaskItem";
+import './Tabs.css';
 
 const Tabs = ({ activeTasks, completedTasks }) => {
   const [activeTab, setActiveTab] = useState('active');
@@ -11,27 +11,34 @@ const Tabs = ({ activeTasks, completedTasks }) => {
   };
 
   return (
-    <div>
-      <div>
-        <button onClick={() => handleTabChange('active')}>Активные</button>
-        <button onClick={() => handleTabChange('completed')}>Выполненные</button>
+    <div className="tabs">
+      <div className="tab-buttons">
+        <button 
+          className={activeTab === 'active' ? 'active' : ''} 
+          onClick={() => handleTabChange('active')}>Активные
+        </button>
+        <button 
+          className={activeTab === 'completed' ? 'active' : ''}
+          onClick={() => handleTabChange('completed')}>Выполненные
+        </button>
       </div>
-        {
-        activeTab === 'active' ? (
+      <div className="tab-content">
+        {activeTab === 'active' ? (
           <div>
-            <h2>Активные задачи</h2>
+            {/* <h2>Активные задачи</h2> */}
             {activeTasks.map((task) => (
               !task.completed &&  <TaskItem key={task.id} task={task} />
             ))}
           </div>
         ) : (
           <div>
-            <h2>Выполненные задачи</h2>
+            {/* <h2>Выполненные задачи</h2> */}
             {completedTasks.map((task) => (
               task.completed &&  <TaskItem key={task.id} task={task} />
             ))}
           </div>
         )}
+        </div>
     </div>
   );
 };

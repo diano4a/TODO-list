@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setUsername } from '../../redux/actions';
+import './UserForm.css'
 
 const UserForm = ({ username, setUsername, onNextClick }) => {
   const handleInputChange = (event) => {
@@ -12,16 +13,17 @@ const UserForm = ({ username, setUsername, onNextClick }) => {
   };
 
   return (
-    <div>
+    <div className="user-form">
       <div className="input-group">
         <label htmlFor="name">Впишите свое имя:</label>
-        <input 
+        <input
           type="text"
           id="name"
           name="name"
-          value={username} 
+          value={username}
           onChange={handleInputChange}
-          placeholder="Имя"/>
+          placeholder="Имя"
+        />
       </div>
 
       <button onClick={handleNextClick}>Дальше</button>
@@ -29,8 +31,8 @@ const UserForm = ({ username, setUsername, onNextClick }) => {
   );
 };
 
-const mapStateProps = (state) => ({
+const mapStateToProps = (state) => ({
   username: state.username,
 });
 
-export default connect(mapStateProps, { setUsername })(UserForm);
+export default connect(mapStateToProps, { setUsername })(UserForm);
